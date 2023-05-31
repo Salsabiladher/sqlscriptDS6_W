@@ -1,0 +1,57 @@
+/*Jumlah total kasus Covid-19 aktif yang baru di setiap
+provinsi lalu diurutkan berdasarkan jumlah kasus yang paling besar*/
+ 
+select province, sum(New_Cases) as Jumlah_kasus_baru from `challenge-1-fga-380721.dataset_covid19.table_covid19`
+group by province
+order by sum(New_Cases) desc
+
+
+/*Mengambil 2 (dua) location iso code yang memiliki 
+jumlah total kematian karena Covid-19 paling sedikit*/
+
+
+select Location_ISO_Code, sum(Total_Deaths) as Total_Kematian from `challenge-1-fga-380721.dataset_covid19.table_covid19`
+group by Location_ISO_Code
+order by sum(Total_Deaths) asc 
+limit 2
+
+
+/*Data tentang tanggal-tanggal ketika rate kasus 
+recovered di Indonesia paling tinggi beserta jumlah ratenya*/
+
+
+select Date, Total_Recovered, Case_Recovered_Rate from `challenge-1-fga-380721.dataset_covid19.table_covid19`
+order by Case_Recovered_Rate desc limit 5
+
+
+/*Total case fatality rate dan case recovered rate dari 
+masing-masing location iso code yang diurutkan dari 
+data yang paling rendah*/
+
+
+select Location_ISO_Code, sum(Case_Fatality_Rate) as Total_Case_Fatality_Rate  from `challenge-1-fga-380721.dataset_covid19.table_covid19`
+group by Location_ISO_Code
+order by sum(Case_Fatality_Rate) asc
+
+
+select Location_ISO_Code, sum(Case_Recovered_Rate) as Total_Case_Recovered_Rate  from `challenge-1-fga-380721.dataset_covid19.table_covid19`
+group by Location_ISO_Code
+order by sum(Case_Recovered_Rate) asc
+
+
+/*Data tentang tanggal-tanggal saat total kasus 
+Covid-19 mulai menyentuh angka 30.000-an*/
+
+
+select Date, Total_Cases from `challenge-1-fga-380721.dataset_covid19.table_covid19`
+where Total_Cases>30000
+
+
+/*Jumlah data yang tercatat ketika kasus Covid-19 lebih 
+dari atau sama dengan 30.000*/
+
+
+select count(Total_Cases) as Jumlah_Total_Kasus from `challenge-1-fga-380721.dataset_covid19.table_covid19`
+where Total_Cases>= 30000
+
+
